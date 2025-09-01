@@ -1,14 +1,3 @@
-export const deleteAccount = async (token: string): Promise<void> => {
-  try {
-    await api.delete('/users/profile', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to delete account');
-  }
-};
 import { User } from '../types';
 import { api } from './axios';
 
@@ -61,6 +50,18 @@ export const updateProfile = async (token: string, updates: { name: string; emai
     return response.data as User;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to update profile');
+  }
+};
+
+export const deleteAccount = async (token: string): Promise<void> => {
+  try {
+    await api.delete('/users/profile', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to delete account');
   }
 };
 
