@@ -2,6 +2,10 @@
 
 
 
+https://github.com/user-attachments/assets/88d83147-8e73-4dfb-a527-c487971fb9f7
+
+
+
 A modern, full-stack personal finance management application built with React, TypeScript, and Node.js. Take control of your financial future with intelligent tracking, automated categorization, and powerful analytics.
 
 
