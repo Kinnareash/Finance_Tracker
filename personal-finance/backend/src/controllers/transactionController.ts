@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import multer from "multer";
 import Transaction from "../models/Transaction";
 import pdfParse from "pdf-parse";
-import Tesseract from "tesseract.js";
 import fs from "fs";
 import path from "path";
 
@@ -74,29 +73,12 @@ export const uploadReceipt = [
           });
         }
       } else if (allowedImageTypes.includes(ext)) {
-        // Extract text from image using OCR
-        try {
-          const result = await Tesseract.recognize(filePath, "eng", {
-            logger: m => {
-              if (m.status === 'recognizing text') {
-                console.log(`OCR Progress: ${Math.round(m.progress * 100)}%`);
-              }
-            }
-          });
-          
-          res.json({ 
-            extractedText: result.data.text || "No text could be extracted from the image",
-            confidence: result.data.confidence,
-            success: true 
-          });
-        } catch (ocrError) {
-          console.error("OCR processing error:", ocrError);
-          res.status(400).json({ 
-            message: "Failed to extract text from image. Please ensure the image is clear and contains readable text.",
-            extractedText: "",
-            success: false 
-          });
-        }
+        // OCR functionality temporarily disabled
+        res.status(400).json({ 
+          message: "Image OCR processing is currently unavailable. Please upload a PDF file instead.",
+          extractedText: "",
+          success: false 
+        });
       } else {
         res.status(400).json({ 
           message: `Unsupported file type: ${ext}. Please upload a PDF or image file (JPG, PNG, etc.)`,
@@ -143,7 +125,7 @@ export const uploadTransactionHistory = [
       const lines = pdfData.text.split("\n");
       const transactions: any[] = [];
 
-      lines.forEach((line) => {
+      lines.forEach((line: string) => {
         const parts = line.trim().split(/\s+/);
         if (parts.length >= 4) {
           transactions.push({

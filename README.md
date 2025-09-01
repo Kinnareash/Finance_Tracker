@@ -1,282 +1,349 @@
-# FinanceTracker 
+# Finance Tracker
 
-A modern, full-stack personal finance management application that helps you take control of your financial future with intelligent tracking, automated categorization, and powerful analytics.
 
-![FinanceTracker Dashboard](https://img.shields.io/badge/Status-Active-green?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-2.0-blue?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
-##  Features
+A modern, full-stack personal finance management application built with React, TypeScript, and Node.js. Take control of your financial future with intelligent tracking, automated categorization, and powerful analytics.
 
-### **Landing Page**
-- Modern dark theme with glassmorphism design
-- Responsive navigation with smooth scrolling
-- Interactive feature showcase
-- User testimonials and benefits section
-- Clean, professional UI/UX
 
-### **Dashboard**
-- Real-time financial overview
-- Monthly income, expenses, and balance tracking
-- Interactive charts and visualizations
-- Recent transactions display
-- Quick transaction management
 
-### **Smart Analytics**
-- AI-powered financial insights
-- Spending pattern analysis
-- Category-wise expense breakdown
-- Trend analysis and forecasting
-- Visual data representation with charts
+## ✨ Features
 
-### 📄 **Receipt Scanning**
-- AI-powered OCR technology
-- Automatic data extraction from receipts
-- Smart categorization of expenses
-- Drag-and-drop upload interface
-- Support for various image formats
+### 🏠 **Core Functionality**
+- **Real-time Dashboard** - Monitor income, expenses, and balance at a glance
+- **Transaction Management** - Add, edit, delete, and categorize transactions
+- **Smart Analytics** - Visual insights with interactive charts and graphs
+- **Receipt Processing** - AI-powered PDF,Image(png,jpg) receipt scanning and data extraction
+- **Multi-currency Support** - Indian Rupee (₹) formatting and calculations
 
-### 💳 **Transaction Management**
-- Add, edit, and delete transactions
-- Income and expense tracking
-- Category-based organization
-- Date and amount filtering
-- Bulk operations support
+### 🎨 **User Experience**
+- **Modern Dark Theme** - Sleek glassmorphism design with gradient effects
+- **Responsive Design** - Optimized for desktop, tablet, and mobile devices
+- **Smooth Animations** - Fluid transitions and micro-interactions
+- **Intuitive Navigation** - Clean, accessible interface with smooth scrolling
 
-### 🔐 **Authentication & Security**
-- Secure user registration and login
-- JWT-based authentication
-- Password encryption with bcrypt
-- Protected routes and API endpoints
-- Session management
+### 🔐 **Security & Authentication**
+- **JWT Authentication** - Secure user registration and login
+- **Password Encryption** - bcrypt hashing for maximum security
+- **Protected Routes** - Authenticated-only access to sensitive data
+- **Session Management** - Automatic token refresh and logout
 
-### ⚙️ **Settings & Customization**
-- User profile management
-- Notification preferences
-- Data export/import options
-- Currency settings (INR support)
-- Theme customization
+### 📊 **Analytics & Insights**
+- **Category Breakdown** - Pie charts showing expense distribution
+- **Spending Trends** - Monthly income vs expenses visualization
+- **Financial Goals** - Track savings and budget targets
+- **Export Capabilities** - Download financial reports and data
+
+## 🚀 Installation
+
+### Prerequisites
+Ensure you have the following installed on your system:
+- **Node.js** (v16.0.0 or higher)
+- **npm** (v7.0.0 or higher)
+- **MongoDB** (v4.4 or higher)
+- **Git**
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/Kinnareash/Finance_Tracker.git
+cd Finance_Tracker
+```
+
+### 2. Backend Setup
+```bash
+# Navigate to backend directory
+cd personal-finance/backend
+
+# Install dependencies
+npm install
+
+# Create environment file
+cp .env.example .env
+
+# Configure your environment variables in .env
+# Add your MongoDB URI, JWT secret, etc.
+```
+
+### 3. Frontend Setup
+```bash
+# Navigate to frontend directory (from project root)
+cd frontend
+
+# Install dependencies
+npm install
+```
+
+### 4. Environment Configuration
+
+#### Backend (.env)
+Create a `.env` file in the `personal-finance/backend` directory:
+```env
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/financetracker
+JWT_SECRET=your-super-secret-jwt-key-here
+GOOGLE_API_KEY=your-google-ai-api-key-optional
+NODE_ENV=development
+```
+
+#### Frontend (.env)
+Create a `.env` file in the `frontend` directory:
+```env
+VITE_API_BASE_URL=http://localhost:5000/api
+```
+
+### 5. Database Setup
+```bash
+# Start MongoDB service (varies by OS)
+# For Windows (if installed as service):
+net start MongoDB
+
+# For macOS with Homebrew:
+brew services start mongodb-community
+
+# For Linux (systemd):
+sudo systemctl start mongod
+```
+
+## 🎯 Usage
+
+### Starting the Application
+
+#### 1. Start Backend Server
+```bash
+cd personal-finance/backend
+npm run dev
+```
+The backend will start on `http://localhost:5000`
+
+#### 2. Start Frontend Development Server
+```bash
+cd frontend
+npm run dev
+```
+The frontend will start on `http://localhost:5173` (or next available port)
+
+### 3. Access the Application
+Open your browser and navigate to:
+```
+http://localhost:5173
+```
+
+### Basic Usage Examples
+
+#### Register a New User
+```bash
+# Example API call for registration
+curl -X POST http://localhost:5000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "securePassword123"
+  }'
+```
+
+#### Add a Transaction
+```bash
+# Example API call for adding transaction
+curl -X POST http://localhost:5000/api/transactions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -d '{
+    "type": "expense",
+    "category": "Food",
+    "amount": 250,
+    "description": "Lunch at restaurant",
+    "date": "2025-01-15"
+  }'
+```
+
+#### Upload Receipt for Processing
+```bash
+# Example API call for receipt upload
+curl -X POST http://localhost:5000/api/transactions/upload-receipt \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -F "receipt=@/path/to/receipt.pdf"
+```
 
 ## 🛠️ Tech Stack
 
 ### **Frontend**
-- **React 18** - Modern UI library with hooks
-- **TypeScript** - Type-safe development
-- **Vite** - Fast build tool and dev server
-- **Tailwind CSS** - Utility-first CSS framework
-- **React Router** - Client-side routing
-- **React Hook Form** - Form handling and validation
-- **Recharts** - Data visualization library
-- **Lucide React** - Modern icon library
-- **Axios** - HTTP client for API calls
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| **React** | 18.3.1 | UI Library |
+| **TypeScript** | 5.0+ | Type Safety |
+| **Vite** | 5.4.8 | Build Tool |
+| **Tailwind CSS** | 3.x | Styling |
+| **React Router** | 7.8.2 | Routing |
+| **React Hook Form** | 7.62.0 | Form Management |
+| **Recharts** | 3.1.2 | Data Visualization |
+| **Lucide React** | 0.344.0 | Icons |
+| **Axios** | 1.11.0 | HTTP Client |
 
 ### **Backend**
-- **Node.js** - JavaScript runtime
-- **Express.js** - Web application framework
-- **TypeScript** - Type-safe server development
-- **MongoDB** - NoSQL database with Mongoose ODM
-- **JWT** - JSON Web Tokens for authentication
-- **bcrypt** - Password hashing
-- **Multer** - File upload handling
-- **CORS** - Cross-origin resource sharing
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| **Node.js** | 16+ | Runtime |
+| **Express.js** | 5.1.0 | Web Framework |
+| **TypeScript** | 5.0+ | Type Safety |
+| **MongoDB** | 4.4+ | Database |
+| **Mongoose** | 8.18.0 | ODM |
+| **JWT** | 9.0.2 | Authentication |
+| **bcrypt** | 6.0.0 | Password Hashing |
+| **Multer** | 2.0.2 | File Uploads |
+| **pdf-parse** | 1.1.1 | PDF Processing |
 
-### **AI & OCR**
-- **Google Generative AI** - AI-powered insights
-- **Tesseract.js** - OCR for receipt scanning
-- **pdf-parse** - PDF text extraction
+### **AI & Processing**
+| Technology | Purpose |
+|------------|---------|
+| **Google Generative AI** | Financial Insights |
+| **pdf-parse** | Receipt Text Extraction |
 
-## 🚀 Getting Started
+### **Development Tools**
+| Tool | Purpose |
+|------|---------|
+| **ESLint** | Code Linting |
+| **ts-node-dev** | Development Server |
+| **CORS** | Cross-Origin Requests |
+| **dotenv** | Environment Variables |
 
-### Prerequisites
-- Node.js (v16 or higher)
-- MongoDB (v4.4 or higher)
-- npm or yarn package manager
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/financetracker.git
-   cd financetracker
-   ```
-
-2. **Backend Setup**
-   ```bash
-   cd personal-finance/backend
-   npm install
-   
-   # Create environment file
-   cp .env.example .env
-   
-   # Configure your environment variables
-   # MongoDB connection string
-   # JWT secret key
-   # Google AI API key (optional)
-   ```
-
-3. **Frontend Setup**
-   ```bash
-   cd ../../frontend
-   npm install
-   ```
-
-4. **Environment Configuration**
-   
-   Create `.env` file in the backend directory:
-   ```env
-   PORT=5000
-   MONGODB_URI=mongodb://localhost:27017/financetracker
-   JWT_SECRET=your-super-secret-jwt-key
-   GOOGLE_API_KEY=your-google-ai-api-key
-   ```
-
-5. **Start the Development Servers**
-   
-   Backend:
-   ```bash
-   cd personal-finance/backend
-   npm run dev
-   ```
-   
-   Frontend:
-   ```bash
-   cd frontend
-   npm run dev
-   ```
-
-6. **Access the Application**
-   - Frontend: http://localhost:5173
-   - Backend API: http://localhost:5000
-
-## 📁 Project Structure
+## 📂 Project Structure
 
 ```
-financetracker/
-├── frontend/                 # React frontend application
-│   ├── src/
-│   │   ├── components/      # Reusable UI components
-│   │   │   ├── Auth/        # Authentication components
-│   │   │   ├── Dashboard/   # Dashboard widgets
-│   │   │   ├── Layout/      # Layout components
-│   │   │   └── Transactions/ # Transaction components
-│   │   ├── pages/           # Page components
-│   │   ├── services/        # API service layer
-│   │   ├── context/         # React context providers
-│   │   ├── utils/           # Utility functions
-│   │   └── types/           # TypeScript type definitions
-│   └── public/              # Static assets
-├── personal-finance/
-│   └── backend/             # Express.js backend
-│       ├── src/
-│       │   ├── controllers/ # Request handlers
-│       │   ├── models/      # Database models
-│       │   ├── routes/      # API routes
-│       │   ├── middleware/  # Custom middleware
-│       │   ├── services/    # Business logic
-│       │   └── config/      # Configuration files
-│       └── uploads/         # File upload directory
-└── README.md
+Finance_Tracker/
+├── 📁 frontend/                 # React TypeScript Frontend
+│   ├── 📁 src/
+│   │   ├── 📁 components/       # Reusable UI Components
+│   │   │   ├── 📁 Auth/         # Authentication Components
+│   │   │   ├── 📁 Dashboard/    # Dashboard Widgets
+│   │   │   ├── 📁 Layout/       # Layout Components
+│   │   │   └── 📁 Transactions/ # Transaction Components
+│   │   ├── 📁 pages/            # Page Components
+│   │   ├── 📁 services/         # API Services
+│   │   ├── 📁 context/          # React Context
+│   │   ├── 📁 utils/            # Utility Functions
+│   │   └── 📁 types/            # TypeScript Types
+│   ├── 📄 package.json
+│   └── 📄 vite.config.ts
+├── 📁 personal-finance/
+│   └── 📁 backend/              # Express.js Backend
+│       ├── 📁 src/
+│       │   ├── 📁 controllers/  # Request Handlers
+│       │   ├── 📁 models/       # Database Models
+│       │   ├── 📁 routes/       # API Routes
+│       │   ├── 📁 middleware/   # Custom Middleware
+│       │   ├── 📁 services/     # Business Logic
+│       │   └── 📁 config/       # Configuration
+│       ├── 📁 uploads/          # File Upload Directory
+│       └── 📄 package.json
+├── 📄 README.md
+└── 📄 .gitignore
 ```
-
-## 🎨 Design Features
-
-### **Dark Theme**
-- Modern slate color palette
-- Gradient backgrounds and borders
-- Glassmorphism effects
-- Consistent spacing and typography
-
-### **Responsive Design**
-- Mobile-first approach
-- Breakpoint-based layouts
-- Touch-friendly interactions
-- Optimized for all screen sizes
-
-### **Interactive Elements**
-- Smooth animations and transitions
-- Hover effects and micro-interactions
-- Loading states and feedback
-- Accessible components
-
-## 📈 API Endpoints
-
-### **Authentication**
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `GET /api/auth/me` - Get current user
-
-### **Transactions**
-- `GET /api/transactions` - Get all transactions
-- `POST /api/transactions` - Create new transaction
-- `PUT /api/transactions/:id` - Update transaction
-- `DELETE /api/transactions/:id` - Delete transaction
-
-### **AI Services**
-- `POST /api/ai/analyze` - Get financial insights
-- `POST /api/ai/receipt` - Process receipt image
 
 ## 🔧 Configuration
 
-### **Environment Variables**
+### Environment Variables
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `PORT` | Server port number | No (default: 5000) |
-| `MONGODB_URI` | MongoDB connection string | Yes |
-| `JWT_SECRET` | JWT signing secret | Yes |
-| `GOOGLE_API_KEY` | Google AI API key | No |
+#### Required Backend Variables
+```env
+MONGODB_URI=mongodb://localhost:27017/financetracker
+JWT_SECRET=your-secret-key-minimum-32-characters
+```
 
-### **Database Setup**
-The application uses MongoDB with the following collections:
-- `users` - User accounts and profiles
-- `transactions` - Financial transactions
-- `categories` - Expense categories
+#### Optional Backend Variables
+```env
+PORT=5000
+GOOGLE_API_KEY=your-google-ai-api-key
+NODE_ENV=development
+```
+
+#### Frontend Variables
+```env
+VITE_API_BASE_URL=http://localhost:5000/api
+```
 
 ## 🚀 Deployment
 
-### **Frontend (Vercel/Netlify)**
+### Production Build
+
+#### Frontend
 ```bash
 cd frontend
 npm run build
-# Deploy the dist/ folder
+# Serve the dist/ folder with a static server
 ```
 
-### **Backend (Heroku/Railway)**
+#### Backend
 ```bash
 cd personal-finance/backend
 npm run build
-# Deploy with environment variables configured
+npm start
 ```
 
-## 🤝 Contributing
+### Deployment Platforms
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+| Platform | Frontend | Backend |
+|----------|----------|---------|
+| **Vercel** | ✅ Recommended | ✅ Serverless |
+| **Netlify** | ✅ Recommended | ❌ |
+| **Heroku** | ✅ | ✅ Recommended |
+| **Railway** | ✅ | ✅ |
+| **DigitalOcean** | ✅ | ✅ |
+
+## 🎯 Development Approach
+
+This project was developed with a focus on modern web development practices and clean architecture:
+
+### **Technical Decisions**
+- **TypeScript** throughout for enhanced type safety and developer experience
+- **React 18** with modern hooks and functional components
+- **Tailwind CSS** for rapid, responsive UI development
+- **MongoDB** for flexible data modeling and scalability
+- **JWT Authentication** for secure, stateless user sessions
+
+### **Code Quality Standards**
+- Consistent ESLint configuration across frontend and backend
+- Modular component architecture with reusable UI elements
+- Clean separation of concerns with services, controllers, and models
+- Responsive design patterns with mobile-first approach
+- Error handling and user feedback throughout the application
+
+### **Performance Optimizations**
+- Vite for fast development and optimized production builds
+- Lazy loading and code splitting for improved load times
+- Efficient state management with React Context
+- Optimized MongoDB queries and indexes
+- Compressed assets and proper caching strategies
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
+- **React Team** for the amazing UI library
+- **Tailwind CSS** for the utility-first CSS framework
+- **MongoDB** for the flexible NoSQL database
 - **Recharts** for beautiful data visualization
-- **Tailwind CSS** for rapid UI development
-- **Lucide React** for consistent iconography
-- **Google AI** for intelligent insights
-- **MongoDB** for flexible data storage
+- **Lucide** for the consistent icon library
 
-## 📞 Support
+## 📞 Contact
 
-If you have any questions or need help, please:
-- Open an issue on GitHub
-- Contact the development team
-- Check the documentation
+For questions about this project or technical discussions:
+
+- 📧 **Developer**: [Your Email]
+- 🐛 **Issues**: [GitHub Issues](https://github.com/Kinnareash/Finance_Tracker/issues)
+- 📖 **Documentation**: [Project Wiki](https://github.com/Kinnareash/Finance_Tracker/wiki)
 
 ---
 
-**Built with ❤️ for better financial management**
+<div align="center">
 
-*Take control of your financial future with FinanceTracker!*
+**Finance Tracker - Personal Finance Management Solution**
+
+*Developed as a comprehensive full-stack application demonstrating modern web development practices*
+
+⭐ **Professional Portfolio Project** ⭐
+
+</div>

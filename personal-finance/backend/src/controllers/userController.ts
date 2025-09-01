@@ -1,16 +1,6 @@
-import Transaction from "../models/Transaction";
-export const deleteUser = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const userId = (req as any).user.id;
-    await Transaction.deleteMany({ user: userId });
-    await User.findByIdAndDelete(userId);
-    res.json({ message: "Account and all data deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error });
-  }
-};
 import { Request, Response } from "express";
 import User from "../models/User";
+import Transaction from "../models/Transaction";
 
 export const getUserProfile = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -36,6 +26,17 @@ export const updateUserProfile = async (req: Request, res: Response): Promise<vo
       return;
     }
     res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+};
+
+export const deleteUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const userId = (req as any).user.id;
+    await Transaction.deleteMany({ user: userId });
+    await User.findByIdAndDelete(userId);
+    res.json({ message: "Account and all data deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
